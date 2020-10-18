@@ -1,5 +1,5 @@
-from game import Game
-from phrase import Phrase
+from phrasehunter.game import Game
+from phrasehunter.phrase import Phrase
 
 if __name__ == '__main__':
     
