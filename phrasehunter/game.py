@@ -7,12 +7,13 @@ class Game:
         self.guesses = [" "]
         self.phrases = []
         self.active_phrase = None
-        
+    
+    # Game gets set up by user entering phrases  
     def create_phrases(self):
         while len(self.phrases) < 5:
             try:
                 entered = input("Please enter your phrase: ")
-                if " " in entered and entered != " " and any(str.isdigit(l) for l in entered)                 == False:
+                if " " in entered and entered != " " and any(str.isdigit(l) for l in entered) == False:
                     object_var = Phrase(entered)
                     self.phrases.append(object_var)
                     continue
@@ -62,12 +63,13 @@ class Game:
             print("Congratulations. You won!")
         self.play_again()
     
+    # Resetting attributes so game can start again
     def reset(self):
         self.missed = 0
         self.guesses = [" "]
         self.active_phrase = None
         
-
+    # Asking user if they want to play again or to quit. Resetting active phrase and attributes if they do, or exiting if they want to quit. 
     def play_again(self):
         self.ask_user = None
         while self.ask_user != "y" and self.ask_user != "n":
