@@ -1,42 +1,31 @@
-from phrase import Phrase
+from phrasehunter.phrase import Phrase
 import random
 
 class Game:
     def __init__(self):
         self.missed = 0
         self.guesses = [" "]
-        self.phrases = []
+        self.phrases = self.phrases = [
+            Phrase("Vancouver Canucks"),
+            Phrase("Calgary Flames"),
+            Phrase("Winnipeg Jets"),
+            Phrase("Toronto Maple Leafs"),
+            Phrase("Montreal Canadians")
+        ]
         self.active_phrase = None
-    
-    # Game gets set up by user entering phrases  
-    def create_phrases(self):
-        while len(self.phrases) < 5:
-            try:
-                entered = input("Please enter your phrase: ")
-                if " " in entered and entered != " " and any(str.isdigit(l) for l in entered) == False:
-                    object_var = Phrase(entered)
-                    self.phrases.append(object_var)
-                    continue
-                else:
-                    print("Invalid input. Try Again!")
-                    continue
-            except ValueError:
-                continue
 
-    
     def get_random_phrase(self):
         return random.choice(self.phrases)
     
     def welcome(self):
-        print("\n\n =====================\n Wilson's Phrase Hunter \n ===================== \n\n")
+        print("\n\n     =====================\n     Wilson's Phrase Hunter \n     ===================== \n Guess Between 5 Canadian Hockey Teams\n\n")
     
     def get_guess(self):
-        user_input = input("Take a guess: ")
+        user_input = input("Guess a letter: ")
         return user_input
     
     def start(self):
         self.welcome()
-        self.create_phrases()
         self.active_phrase = self.get_random_phrase()
         while self.missed < 5 and self.active_phrase.check_complete(self.guesses) == False:
             print(f"\nNumber of tries = {self.missed}")
@@ -63,8 +52,8 @@ class Game:
             print("Congratulations. You won!")
         self.play_again()
     
-    # Resetting attributes so game can start again
     def reset(self):
+        """Resets game with current list of phrases."""
         self.missed = 0
         self.guesses = [" "]
         self.active_phrase = None
